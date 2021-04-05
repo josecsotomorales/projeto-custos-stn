@@ -7,7 +7,7 @@ docker run -it --rm -p 8888:8888 jupyter/pyspark-notebook
 ```
 
 Para persistir os dados gerados no container, adiciona a flag `-v` ao commando docker.
-Exemplo: `/Users/Jose/Workspace/projeto-custos-stn <->“/home/Jose/work`
+Exemplo: `/Users/Jose/Workspace/projeto-custos-stn <-> /home/Jose/work`
 ```
 docker run -it --rm -p 8888:8888 -v /Users/Jose/Workspace/projeto-custos-stn:/home/Jose/work jupyter/pyspark-notebook
 ```
