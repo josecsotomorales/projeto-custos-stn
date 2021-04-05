@@ -28,5 +28,5 @@
 ## Adicionar servidor no PgAdmin:
 * **Host** `postgres`
 * **Porta** `5432`
-* **Usuario** as `POSTGRES_USER`, default: `postgres`
-* **Senha** as `POSTGRES_PASSWORD`, default `postgres`
+* **Usuario** `POSTGRES_USER`, default: `postgres`
+* **Senha** `POSTGRES_PASSWORD`, default `postgres`
