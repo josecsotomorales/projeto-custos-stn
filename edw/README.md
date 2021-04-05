@@ -5,7 +5,7 @@
 * docker-compose
 
 ## Guia de Usuario
-* No terminal, vai no diretorio  `cd edw`
+* No terminal vá no diretorio `cd edw`
 * Executar `docker-compose up -d`
 
 ## Variaveis de Ambiente
@@ -15,17 +15,17 @@
 * `PGADMIN_DEFAULT_EMAIL` default **pgadmin4@pgadmin.org**
 * `PGADMIN_DEFAULT_PASSWORD` default **admin**
 
-## Accessando ao Postgres: 
+## Acessar ao Postgres: 
 * `localhost:5432`
 * **Usuario:** postgres (default)
 * **Senha:** postgres (default)
 
-## Accessando ao PgAdmin: 
+## Acessar ao PgAdmin: 
 * **URL:** `http://localhost:5050`
 * **Usuario:** pgadmin4@pgadmin.org (default)
 * **Senha:** admin (default)
 
-## Add a new server in PgAdmin:
+## Adicionar servidor no PgAdmin:
 * **Host** `postgres`
 * **Porta** `5432`
 * **Usuario** as `POSTGRES_USER`, default: `postgres`
