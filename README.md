@@ -41,7 +41,7 @@ Projeto final da pós-graduação em Análise de Dados com BI e Big Data da Univ
 | Demais Custos | [http://apidatalake.tesouro.gov.br/ords/custos/tt/demais?offset=2363900]() |
  
 ### Estrutura do retorno da API `JSON`
-```
+```json
 {
 "items": [
         {
