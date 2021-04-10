@@ -29,7 +29,7 @@ start = DummyOperator(task_id = 'start',
 REGION_NAME = config('AWS_REGION')
 AWS_ACCESS_KEY_ID = config('BUCKET_AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('BUCKET_AWS_SECRET_ACCESS_KEY')
-#fivetran lambda connector
+
 custos_stn_pessoal_ativo = LambdaOperator(task_id = 'custos_stn_pessoal_ativo',
                                     arn = 'arn:aws:lambda:us-east-2:005703965888:function:custos-stn-pessoal-ativo',
                                     region_name = REGION_NAME,
