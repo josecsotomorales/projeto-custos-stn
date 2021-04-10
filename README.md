@@ -4,9 +4,6 @@ Projeto final da pós-graduação em Análise de Dados com BI e Big Data da Univ
 
 ## Ferramentas Utilizadas no projeto
 
-  ### Agrupamento de informações e pré-documentaçáo
-   - [Notion](https://www.notion.so/) 
-
   ### Consultar a API e Analisar os dados
    - [Insomnia](https://insomnia.rest/)
 
