@@ -32,24 +32,24 @@ Projeto final da pós-graduação em Análise de Dados com BI e Big Data da Univ
 | ------ | ------ |
 | Pessoal Ativo | [http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_ativo]() |
 | Depreciaçāo | [http://apidatalake.tesouro.gov.br/ords/custos/tt/depreciacao]() |
-| Transferência | [http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo]() |
+| Transferência | [http://apidatalake.tesouro.gov.br/ords/custos/tt/transferencias]() |
 | Pessoal Inativo | [http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo]() |
 | Pensionista | [http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas]()|
-| Demais Custos | [http://apidatalake.tesouro.gov.br/ords/custos/tt/demais?offset=2363900]() |
+| Demais Custos | [http://apidatalake.tesouro.gov.br/ords/custos/tt/demais?]() |
  
 ### Estrutura do retorno da API `JSON`
 ```json
 {
 "items": [
         {
-           ...,
-           *chave:valor*,
-           *chave:valor*,
-           *chave:valor*,
-           *chave:valor*,
-           ...
+          // ...,
+          "*chave_1": "valor_1*" ,
+          "*chave_2": "valor_2*",
+          "*chave_3": "valor_3*",
+          "*chave_4": "valor_4*",
+          // ...
         },
-       ...
+      //  ...
     ],
     "hasMore": true,
     "limit": 250,
@@ -81,31 +81,31 @@ Projeto final da pós-graduação em Análise de Dados com BI e Big Data da Univ
 
 ### Último offset da página `JSON`
 ```json
-   {
-     ...
-  "hasMore": false,
-  "limit": 250,
-  "offset": 6598750,
-  "count": 26,
-  "links": [
-    {
-      "rel": "self",
-      "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_ativo"
-    },
-    {
-      "rel": "describedby",
-      "href": "http://apidatalake.tesouro.gov.br/ords/custos/metadata-catalog/tt/item"
-    },
-    {
-      "rel": "first",
-      "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_ativo"
-    },
-    {
-      "rel": "prev",
-      "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_ativo?offset=6598500"
-    }
-  ]
-   }
+  {
+    //  ...
+    "hasMore": false,
+    "limit": 250,
+    "offset": 6598750,
+    "count": 26,
+    "links": [
+      {
+        "rel": "self",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_ativo"
+      },
+      {
+        "rel": "describedby",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/metadata-catalog/tt/item"
+      },
+      {
+        "rel": "first",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_ativo"
+      },
+      {
+        "rel": "prev",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_ativo?offset=6598500"
+      }
+    ]
+  }
 ```
 
 ### Amostra de um resultado de items `JSON`
@@ -243,12 +243,12 @@ from stg_pessoal_ativo
 ### Último offset da página `JSON`
 ```json
    {
-        ...
+        // ...
         "hasMore": false,
         "limit": 250,
         "offset": 123999,
         "count": 144,
-        links": [
+        "links": [
           {
             "rel": "self",
             "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/depreciacao"
@@ -355,8 +355,8 @@ from stg_depreciacao
 ### Último offset da página `JSON`
 ```json
    {
-        ...
-        "hasMore": false,
+      // ...
+      "hasMore": false,
       "limit": 250,
       "offset": 25325,
       "count": 103,
@@ -481,31 +481,31 @@ from stg_transferencias
 
 ### Último offset da página `JSON`
 ```json
-   {
-        ...
-        "hasMore": false,
-      "limit": 250,
-      "offset": 61250,
-      "count": 74,
-      "links": [
-        {
-          "rel": "self",
-          "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo"
-        },
-        {
-          "rel": "describedby",
-          "href": "http://apidatalake.tesouro.gov.br/ords/custos/metadata-catalog/tt/item"
-        },
-        {
-          "rel": "first",
-          "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo"
-        },
-        {
-          "rel": "prev",
-          "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo?offset=61000"
-        }
-      ]
-    }
+  {
+    // ...
+    "hasMore": false,
+    "limit": 250,
+    "offset": 61250,
+    "count": 74,
+    "links": [
+      {
+        "rel": "self",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo"
+      },
+      {
+        "rel": "describedby",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/metadata-catalog/tt/item"
+      },
+      {
+        "rel": "first",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo"
+      },
+      {
+        "rel": "prev",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo?offset=61000"
+      }
+    ]
+  }
 ```
 
 ### Amostra de um resultado de items `JSON`
@@ -593,30 +593,30 @@ from stg_pessoal_inativo
 ### Último offset da página `JSON`
 ```json
    {
-     ...
-	"hasMore": false,
-	"limit": 250,
-	"offset": 20200,
-	"count": 233,
-	"links": [
-		{
-			"rel": "self",
-			"href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas"
-		},
-		{
-			"rel": "describedby",
-			"href": "http://apidatalake.tesouro.gov.br/ords/custos/metadata-catalog/tt/item"
-		},
-		{
-			"rel": "first",
-			"href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas"
-		},
-		{
-			"rel": "prev",
-			"href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas?offset=19950"
-		}
-	]
-}
+    //  ...
+    "hasMore": false,
+    "limit": 250,
+    "offset": 20200,
+    "count": 233,
+    "links": [
+      {
+        "rel": "self",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas"
+      },
+      {
+        "rel": "describedby",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/metadata-catalog/tt/item"
+      },
+      {
+        "rel": "first",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas"
+      },
+      {
+        "rel": "prev",
+        "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas?offset=19950"
+      }
+    ]
+  }
 ```
 
 ### Amostra de um resultado de items `JSON`
@@ -697,31 +697,31 @@ from stg_pensionistas
 
 ### Último offset da página `JSON`
 ```json
-   {
-        ...
-        "hasMore": false,
-		"limit": 250,
-		"offset": 2363900,
-		"count": 96,
-		"links": [
-			{
-				"rel": "self",
-				"href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/demais"
-			},
-			{
-				"rel": "describedby",
-				"href": "http://apidatalake.tesouro.gov.br/ords/custos/metadata-catalog/tt/item"
-			},
-			{
-				"rel": "first",
-				"href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/demais"
-			},
-			{
-				"rel": "prev",
-				"href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/demais?offset=2363650"
-			}
-		]
-	}
+    { 
+      // ...
+      "hasMore": false,
+      "limit": 250,
+      "offset": 2363900,
+      "count": 96,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/demais"
+        },
+        {
+          "rel": "describedby",
+          "href": "http://apidatalake.tesouro.gov.br/ords/custos/metadata-catalog/tt/item"
+        },
+        {
+          "rel": "first",
+          "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/demais"
+        },
+        {
+          "rel": "prev",
+          "href": "http://apidatalake.tesouro.gov.br/ords/custos/tt/demais?offset=2363650"
+        }
+      ]
+	  }
 ```
 
 ### Amostra de um resultado de items `JSON`
