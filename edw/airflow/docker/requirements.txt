@@ -1,0 +1,7 @@
+apache-airflow[postgres]
+paramiko
+boto3
+apache-airflow-providers-sftp
+apache-airflow-providers-ssh
+python-decouple
+SQLAlchemy==1.3.23
