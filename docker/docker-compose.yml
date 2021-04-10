@@ -59,6 +59,15 @@ services:
       - ./airflow/.env:/root/airflow/.env
     restart: always 
 
+  jupyter-notebook:
+    <<: *services-common
+    container_name: jupyter_notebook
+    image: jupyter/pyspark-notebook
+    ports: 
+      - 8888:8888
+    volumes:
+      - jupyter:/home/custos-stn/work
+
 networks:
   network-common:
     driver: bridge
@@ -66,3 +75,4 @@ networks:
 volumes:
     postgres:
     pgadmin:
+    jupyter:
