@@ -15,7 +15,7 @@
             "file_number": 0
         },
         "transferencia": {
-            "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/transferencias",
+            "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/transferencia",
             "initial_offset": 0,
             "incremental_offset": 250,
             "is_full_load": false,

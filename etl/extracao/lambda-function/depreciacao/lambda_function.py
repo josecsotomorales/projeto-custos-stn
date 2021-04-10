@@ -1,6 +1,6 @@
 from decouple import config
 from datetime import datetime
-from pessoal_ativo_api import pessoal_ativo_api
+from depreciacao_api import depreciacao_api
 import json
 import boto3
 import pandas as pd
@@ -10,7 +10,7 @@ AWS_REGION = config('AWS_REGION')
 BUCKET_AWS_ACCESS_KEY_ID = config('BUCKET_AWS_ACCESS_KEY_ID')
 BUCKET_AWS_SECRET_ACCESS_KEY = config('BUCKET_AWS_SECRET_ACCESS_KEY')
 CUSTO_STN_SOURCES_STATES = 'custos_stn_sources_states.json'
-CUSTO_STN_PESSOAL_ATIVO_PATH = 'pessoal_ativo'
+CUSTO_STN_DEPRECIACAO_PATH = 'depreciacao'
 custos_stn_state = {}
 STOP_CONDITION_TEST = 1500
 S3 = boto3.resource(
@@ -71,53 +71,53 @@ def get_initial_state(s3_path):
     
     return None
 
-def consume_api(custos_stn_state,pessoal_ativo):
+def consume_api(custos_stn_state,depreciacao):
     # carregar o arquivo de estado
-    if pessoal_ativo.initial_offset <= STOP_CONDITION_TEST:
-        pessoal_ativo_items = pessoal_ativo.get_items_from_api()
+    if depreciacao.initial_offset <= STOP_CONDITION_TEST:
+        depreciacao_items = depreciacao.get_items_from_api()
 
-        if len(pessoal_ativo_items['items']) > 0:
+        if len(depreciacao_items['items']) > 0:
 
-            pessoal_ativo.initial_offset = pessoal_ativo_items['initial_offset']
-            pessoal_ativo.file_number = pessoal_ativo_items['file_number']
-            custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo_items['initial_offset']
-            custos_stn_state['sources']['file_number'] = pessoal_ativo_items['file_number']
+            depreciacao.initial_offset = depreciacao_items['initial_offset']
+            depreciacao.file_number = depreciacao_items['file_number']
+            custos_stn_state['sources']['depreciacao']['initial_offset'] = depreciacao_items['initial_offset']
+            custos_stn_state['sources']['file_number'] = depreciacao_items['file_number']
             
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
-            load_s3_file_content(f'{CUSTO_STN_PESSOAL_ATIVO_PATH}/pessoal_ativo_{pessoal_ativo.file_number}.csv', json.dumps(pessoal_ativo_items['items'], indent= 2))
+            load_s3_file_content(f'{CUSTO_STN_DEPRECIACAO_PATH}/depreciacao_{depreciacao.file_number}.csv', json.dumps(depreciacao_items['items'], indent= 2))
 
-        while pessoal_ativo_items['hasMore'] and pessoal_ativo_items['initial_offset'] <= STOP_CONDITION_TEST:
+        while depreciacao_items['hasMore'] and depreciacao_items['initial_offset'] <= STOP_CONDITION_TEST:
             
-            pessoal_ativo_items = pessoal_ativo.get_items_from_api()
+            depreciacao_items = depreciacao.get_items_from_api()
             
-            pessoal_ativo.initial_offset = pessoal_ativo_items['initial_offset']
-            pessoal_ativo.file_number = pessoal_ativo_items['file_number'] + 1
-            pessoal_ativo.is_full_load = False
-            custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo.initial_offset
-            custos_stn_state['sources']['pessoal_ativo']['file_number'] =  pessoal_ativo.file_number
-            custos_stn_state['sources']['pessoal_ativo']['is_full_load'] = pessoal_ativo.is_full_load
+            depreciacao.initial_offset = depreciacao_items['initial_offset']
+            depreciacao.file_number = depreciacao_items['file_number'] + 1
+            depreciacao.is_full_load = False
+            custos_stn_state['sources']['depreciacao']['initial_offset'] = depreciacao.initial_offset
+            custos_stn_state['sources']['depreciacao']['file_number'] =  depreciacao.file_number
+            custos_stn_state['sources']['depreciacao']['is_full_load'] = depreciacao.is_full_load
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
-            load_s3_file_content(f'{CUSTO_STN_PESSOAL_ATIVO_PATH}/pessoal_ativo_{pessoal_ativo.file_number}.csv', json.dumps(pessoal_ativo_items['items'], indent= 2))
+            load_s3_file_content(f'{CUSTO_STN_DEPRECIACAO_PATH}/depreciacao_{depreciacao.file_number}.csv', json.dumps(depreciacao_items['items'], indent= 2))
         
 
 
-def reset_state(pessoal_ativo,custos_stn_state):
-    pessoal_ativo.initial_offset = 0
-    pessoal_ativo.file_number = 0
-    custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo.initial_offset
-    custos_stn_state['sources']['file_number'] = pessoal_ativo.file_number
+def reset_state(depreciacao,custos_stn_state):
+    depreciacao.initial_offset = 0
+    depreciacao.file_number = 0
+    custos_stn_state['sources']['depreciacao']['initial_offset'] = depreciacao.initial_offset
+    custos_stn_state['sources']['file_number'] = depreciacao.file_number
     
     load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
 
 def handle_data_with_s3():
     custos_stn_state = json.loads(get_s3_file_content(CUSTO_STN_SOURCES_STATES))
-    pessoal_ativo = pessoal_ativo_api(custos_stn_state['sources']['pessoal_ativo'])
+    depreciacao = depreciacao_api(custos_stn_state['sources']['depreciacao'])
     
-    if pessoal_ativo.is_full_load:
-        reset_state(pessoal_ativo,custos_stn_state)
-        consume_api(custos_stn_state,pessoal_ativo)
-    elif not pessoal_ativo.is_full_load:
-        consume_api(custos_stn_state,pessoal_ativo)
+    if depreciacao.is_full_load:
+        reset_state(depreciacao,custos_stn_state)
+        consume_api(custos_stn_state,depreciacao)
+    elif not depreciacao.is_full_load:
+        consume_api(custos_stn_state,depreciacao)
 
 def lambda_handler(event, context):
     

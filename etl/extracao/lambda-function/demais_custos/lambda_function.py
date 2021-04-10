@@ -1,6 +1,6 @@
 from decouple import config
 from datetime import datetime
-from pessoal_ativo_api import pessoal_ativo_api
+from demais_api import demais_api
 import json
 import boto3
 import pandas as pd
@@ -10,7 +10,7 @@ AWS_REGION = config('AWS_REGION')
 BUCKET_AWS_ACCESS_KEY_ID = config('BUCKET_AWS_ACCESS_KEY_ID')
 BUCKET_AWS_SECRET_ACCESS_KEY = config('BUCKET_AWS_SECRET_ACCESS_KEY')
 CUSTO_STN_SOURCES_STATES = 'custos_stn_sources_states.json'
-CUSTO_STN_PESSOAL_ATIVO_PATH = 'pessoal_ativo'
+CUSTO_STN_DEMAIS_PATH = 'demais'
 custos_stn_state = {}
 STOP_CONDITION_TEST = 1500
 S3 = boto3.resource(
@@ -71,53 +71,53 @@ def get_initial_state(s3_path):
     
     return None
 
-def consume_api(custos_stn_state,pessoal_ativo):
+def consume_api(custos_stn_state,demais):
     # carregar o arquivo de estado
-    if pessoal_ativo.initial_offset <= STOP_CONDITION_TEST:
-        pessoal_ativo_items = pessoal_ativo.get_items_from_api()
+    if demais.initial_offset <= STOP_CONDITION_TEST:
+        demais_items = demais.get_items_from_api()
 
-        if len(pessoal_ativo_items['items']) > 0:
+        if len(demais_items['items']) > 0:
 
-            pessoal_ativo.initial_offset = pessoal_ativo_items['initial_offset']
-            pessoal_ativo.file_number = pessoal_ativo_items['file_number']
-            custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo_items['initial_offset']
-            custos_stn_state['sources']['file_number'] = pessoal_ativo_items['file_number']
+            demais.initial_offset = demais_items['initial_offset']
+            demais.file_number = demais_items['file_number']
+            custos_stn_state['sources']['demais']['initial_offset'] = demais_items['initial_offset']
+            custos_stn_state['sources']['file_number'] = demais_items['file_number']
             
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
-            load_s3_file_content(f'{CUSTO_STN_PESSOAL_ATIVO_PATH}/pessoal_ativo_{pessoal_ativo.file_number}.csv', json.dumps(pessoal_ativo_items['items'], indent= 2))
+            load_s3_file_content(f'{CUSTO_STN_DEMAIS_PATH}/demais_{demais.file_number}.csv', json.dumps(demais_items['items'], indent= 2))
 
-        while pessoal_ativo_items['hasMore'] and pessoal_ativo_items['initial_offset'] <= STOP_CONDITION_TEST:
+        while demais_items['hasMore'] and demais_items['initial_offset'] <= STOP_CONDITION_TEST:
             
-            pessoal_ativo_items = pessoal_ativo.get_items_from_api()
+            demais_items = demais.get_items_from_api()
             
-            pessoal_ativo.initial_offset = pessoal_ativo_items['initial_offset']
-            pessoal_ativo.file_number = pessoal_ativo_items['file_number'] + 1
-            pessoal_ativo.is_full_load = False
-            custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo.initial_offset
-            custos_stn_state['sources']['pessoal_ativo']['file_number'] =  pessoal_ativo.file_number
-            custos_stn_state['sources']['pessoal_ativo']['is_full_load'] = pessoal_ativo.is_full_load
+            demais.initial_offset = demais_items['initial_offset']
+            demais.file_number = demais_items['file_number'] + 1
+            demais.is_full_load = False
+            custos_stn_state['sources']['demais']['initial_offset'] = demais.initial_offset
+            custos_stn_state['sources']['demais']['file_number'] =  demais.file_number
+            custos_stn_state['sources']['demais']['is_full_load'] = demais.is_full_load
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
-            load_s3_file_content(f'{CUSTO_STN_PESSOAL_ATIVO_PATH}/pessoal_ativo_{pessoal_ativo.file_number}.csv', json.dumps(pessoal_ativo_items['items'], indent= 2))
+            load_s3_file_content(f'{CUSTO_STN_DEMAIS_PATH}/demais_{demais.file_number}.csv', json.dumps(demais_items['items'], indent= 2))
         
 
 
-def reset_state(pessoal_ativo,custos_stn_state):
-    pessoal_ativo.initial_offset = 0
-    pessoal_ativo.file_number = 0
-    custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo.initial_offset
-    custos_stn_state['sources']['file_number'] = pessoal_ativo.file_number
+def reset_state(demais,custos_stn_state):
+    demais.initial_offset = 0
+    demais.file_number = 0
+    custos_stn_state['sources']['demais']['initial_offset'] = demais.initial_offset
+    custos_stn_state['sources']['file_number'] = demais.file_number
     
     load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
 
 def handle_data_with_s3():
     custos_stn_state = json.loads(get_s3_file_content(CUSTO_STN_SOURCES_STATES))
-    pessoal_ativo = pessoal_ativo_api(custos_stn_state['sources']['pessoal_ativo'])
+    demais = demais_api(custos_stn_state['sources']['demais'])
     
-    if pessoal_ativo.is_full_load:
-        reset_state(pessoal_ativo,custos_stn_state)
-        consume_api(custos_stn_state,pessoal_ativo)
-    elif not pessoal_ativo.is_full_load:
-        consume_api(custos_stn_state,pessoal_ativo)
+    if demais.is_full_load:
+        reset_state(demais,custos_stn_state)
+        consume_api(custos_stn_state,demais)
+    elif not demais.is_full_load:
+        consume_api(custos_stn_state,demais)
 
 def lambda_handler(event, context):
     
