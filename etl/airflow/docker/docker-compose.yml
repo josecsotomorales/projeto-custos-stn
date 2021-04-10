@@ -1,0 +1,40 @@
+version: '3'
+
+services: 
+  
+  postgres: 
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+
+  airflow:
+    container_name: airflow
+    image: custos-stn-airflow
+    build:
+      dockerfile: ./docker/Dockerfile
+      context: ..
+    depends_on: 
+      - postgres
+    ports: 
+      - 8080:8080
+    command: >
+      bash -c "
+        airflow db init && 
+        airflow users create -r Admin -u airflow -e airflow@airflow.com -f Air -l Flow -p airflow && 
+        (airflow webserver & airflow scheduler)
+      "
+      
+    volumes:
+      - ../airflow/dags:/root/airflow/dags
+      - ../airflow/plugins:/root/airflow/plugins
+      - ../airflow/.env:/root/airflow/.env
+    restart: always 
+
+   
