@@ -3,7 +3,7 @@ version: '3.5'
 x-services-common:
   &services-common
   networks:
-    - postgres
+    - network-common
 
 services:
   postgres:
@@ -41,7 +41,7 @@ services:
     container_name: airflow
     image: custos-stn-airflow
     build:
-      dockerfile: airflow.dockerfile
+      dockerfile: Dockerfile
       context: ./airflow/docker/
     depends_on: 
       - postgres
@@ -60,7 +60,7 @@ services:
     restart: always 
 
 networks:
-  postgres:
+  network-common:
     driver: bridge
 
 volumes:
