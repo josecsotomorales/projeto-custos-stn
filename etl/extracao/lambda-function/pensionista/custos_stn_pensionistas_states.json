@@ -1,0 +1,11 @@
+{
+    "sources": {
+        "pensionista": {
+            "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas",
+            "initial_offset": 0,
+            "incremental_offset": 250,
+            "is_full_load": true,
+            "file_number": 0
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "sources": {
+        "pessoal_ativo": {
+            "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_ativo",
+            "initial_offset": 0,
+            "incremental_offset": 250,
+            "is_full_load": true,
+            "file_number": 0
+        }
+    }
+}

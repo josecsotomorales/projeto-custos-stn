@@ -10,7 +10,7 @@ BUCKET = config('BUCKET')
 AWS_REGION = config('AWS_REGION')
 BUCKET_AWS_ACCESS_KEY_ID = config('BUCKET_AWS_ACCESS_KEY_ID')
 BUCKET_AWS_SECRET_ACCESS_KEY = config('BUCKET_AWS_SECRET_ACCESS_KEY')
-CUSTO_STN_SOURCES_STATES = 'custos_stn_sources_states.json'
+CUSTO_STN_SOURCES_STATES = 'custos_stn_demais_custos_states.json'
 CUSTO_STN_DEMAIS_PATH = 'demais'
 custos_stn_state = {}
 STOP_CONDITION_TEST = 100000000
@@ -66,7 +66,7 @@ def get_s3_file_content(s3_path):
 
 def get_initial_state(s3_path):
 
-    custos_stn_sources_states_file = open('custos_stn_sources_states.json',)
+    custos_stn_sources_states_file = open(CUSTO_STN_SOURCES_STATES,)
     if custos_stn_sources_states_file:
         return json.load(custos_stn_sources_states_file)
     
