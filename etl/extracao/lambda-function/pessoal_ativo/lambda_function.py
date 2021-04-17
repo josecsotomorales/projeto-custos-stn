@@ -4,6 +4,7 @@ from pessoal_ativo_api import pessoal_ativo_api
 import json
 import boto3
 import pandas as pd
+from time import sleep
 # AWS Credentials
 BUCKET = config('BUCKET')
 AWS_REGION = config('AWS_REGION')
@@ -12,7 +13,7 @@ BUCKET_AWS_SECRET_ACCESS_KEY = config('BUCKET_AWS_SECRET_ACCESS_KEY')
 CUSTO_STN_SOURCES_STATES = 'custos_stn_sources_states.json'
 CUSTO_STN_PESSOAL_ATIVO_PATH = 'pessoal_ativo'
 custos_stn_state = {}
-STOP_CONDITION_TEST = 1500
+STOP_CONDITION_TEST = 100000000
 S3 = boto3.resource(
     's3',
     region_name = AWS_REGION,
@@ -86,18 +87,18 @@ def consume_api(custos_stn_state,pessoal_ativo):
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
             load_s3_file_content(f'{CUSTO_STN_PESSOAL_ATIVO_PATH}/pessoal_ativo_{pessoal_ativo.file_number}.csv', json.dumps(pessoal_ativo_items['items'], indent= 2))
 
-        while pessoal_ativo_items['hasMore'] and pessoal_ativo_items['initial_offset'] <= STOP_CONDITION_TEST:
-            
-            pessoal_ativo_items = pessoal_ativo.get_items_from_api()
-            
-            pessoal_ativo.initial_offset = pessoal_ativo_items['initial_offset']
-            pessoal_ativo.file_number = pessoal_ativo_items['file_number'] + 1
-            pessoal_ativo.is_full_load = False
-            custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo.initial_offset
-            custos_stn_state['sources']['pessoal_ativo']['file_number'] =  pessoal_ativo.file_number
-            custos_stn_state['sources']['pessoal_ativo']['is_full_load'] = pessoal_ativo.is_full_load
-            load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
-            load_s3_file_content(f'{CUSTO_STN_PESSOAL_ATIVO_PATH}/pessoal_ativo_{pessoal_ativo.file_number}.csv', json.dumps(pessoal_ativo_items['items'], indent= 2))
+            while pessoal_ativo_items['hasMore'] and pessoal_ativo_items['initial_offset'] <= STOP_CONDITION_TEST:
+                sleep(5)
+                pessoal_ativo_items = pessoal_ativo.get_items_from_api()
+                
+                pessoal_ativo.initial_offset = pessoal_ativo_items['initial_offset']
+                pessoal_ativo.file_number = pessoal_ativo_items['file_number'] + 1
+                pessoal_ativo.is_full_load = False
+                custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo.initial_offset
+                custos_stn_state['sources']['pessoal_ativo']['file_number'] =  pessoal_ativo.file_number
+                custos_stn_state['sources']['pessoal_ativo']['is_full_load'] = pessoal_ativo.is_full_load
+                load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
+                load_s3_file_content(f'{CUSTO_STN_PESSOAL_ATIVO_PATH}/pessoal_ativo_{pessoal_ativo.file_number}.csv', json.dumps(pessoal_ativo_items['items'], indent= 2))
         
 
 

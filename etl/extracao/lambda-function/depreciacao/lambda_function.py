@@ -4,6 +4,7 @@ from depreciacao_api import depreciacao_api
 import json
 import boto3
 import pandas as pd
+from time import sleep
 # AWS Credentials
 BUCKET = config('BUCKET')
 AWS_REGION = config('AWS_REGION')
@@ -12,7 +13,7 @@ BUCKET_AWS_SECRET_ACCESS_KEY = config('BUCKET_AWS_SECRET_ACCESS_KEY')
 CUSTO_STN_SOURCES_STATES = 'custos_stn_sources_states.json'
 CUSTO_STN_DEPRECIACAO_PATH = 'depreciacao'
 custos_stn_state = {}
-STOP_CONDITION_TEST = 1500
+STOP_CONDITION_TEST = 100000000
 S3 = boto3.resource(
     's3',
     region_name = AWS_REGION,
@@ -86,18 +87,18 @@ def consume_api(custos_stn_state,depreciacao):
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
             load_s3_file_content(f'{CUSTO_STN_DEPRECIACAO_PATH}/depreciacao_{depreciacao.file_number}.csv', json.dumps(depreciacao_items['items'], indent= 2))
 
-        while depreciacao_items['hasMore'] and depreciacao_items['initial_offset'] <= STOP_CONDITION_TEST:
-            
-            depreciacao_items = depreciacao.get_items_from_api()
-            
-            depreciacao.initial_offset = depreciacao_items['initial_offset']
-            depreciacao.file_number = depreciacao_items['file_number'] + 1
-            depreciacao.is_full_load = False
-            custos_stn_state['sources']['depreciacao']['initial_offset'] = depreciacao.initial_offset
-            custos_stn_state['sources']['depreciacao']['file_number'] =  depreciacao.file_number
-            custos_stn_state['sources']['depreciacao']['is_full_load'] = depreciacao.is_full_load
-            load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
-            load_s3_file_content(f'{CUSTO_STN_DEPRECIACAO_PATH}/depreciacao_{depreciacao.file_number}.csv', json.dumps(depreciacao_items['items'], indent= 2))
+            while depreciacao_items['hasMore'] and depreciacao_items['initial_offset'] <= STOP_CONDITION_TEST:
+                sleep(5)
+                depreciacao_items = depreciacao.get_items_from_api()
+                
+                depreciacao.initial_offset = depreciacao_items['initial_offset']
+                depreciacao.file_number = depreciacao_items['file_number'] + 1
+                depreciacao.is_full_load = False
+                custos_stn_state['sources']['depreciacao']['initial_offset'] = depreciacao.initial_offset
+                custos_stn_state['sources']['depreciacao']['file_number'] =  depreciacao.file_number
+                custos_stn_state['sources']['depreciacao']['is_full_load'] = depreciacao.is_full_load
+                load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
+                load_s3_file_content(f'{CUSTO_STN_DEPRECIACAO_PATH}/depreciacao_{depreciacao.file_number}.csv', json.dumps(depreciacao_items['items'], indent= 2))
         
 
 

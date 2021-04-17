@@ -19,7 +19,7 @@ dag = DAG(
     dag_id = 'custos_stn_pessoal_ativo',
     start_date = airflow.utils.dates.days_ago(2),
     default_args = default_args,
-    schedule_interval = '0 0 * * *',
+    schedule_interval = '*/16 * * * *',
     catchup=False
 )
 
@@ -68,4 +68,4 @@ custos_stn_demais_custos = LambdaOperator(task_id = 'custos_stn_demais_custos',
 
 
 # Define graph connections
-start >> custos_stn_pessoal_ativo >> custos_stn_depreciacao >> custos_stn_transferencia >> custos_stn_pessoal_inativo >> custos_stn_pensionista >> custos_stn_demais_custos 
+start >> custos_stn_transferencia >> custos_stn_pessoal_inativo >> custos_stn_pensionista >> custos_stn_depreciacao  >>   custos_stn_demais_custos >> custos_stn_pessoal_ativo

@@ -11,35 +11,35 @@
             "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/depreciacao",
             "initial_offset": 0,
             "incremental_offset": 250,
-            "is_full_load": false,
+            "is_full_load": true,
             "file_number": 0
         },
         "transferencia": {
             "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/transferencias",
             "initial_offset": 0,
             "incremental_offset": 250,
-            "is_full_load": false,
+            "is_full_load": true,
             "file_number": 0
         },
         "pessoal_inativo": {
             "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/pessoal_inativo",
             "initial_offset": 0,
             "incremental_offset": 250,
-            "is_full_load": false,
+            "is_full_load": true,
             "file_number": 0
         },
         "pensionista": {
             "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/pensionistas",
             "initial_offset": 0,
             "incremental_offset": 250,
-            "is_full_load": false,
+            "is_full_load": true,
             "file_number": 0
         },
         "demais": {
             "endpoint_url" : "http://apidatalake.tesouro.gov.br/ords/custos/tt/demais",
             "initial_offset": 0,
             "incremental_offset": 250,
-            "is_full_load": false,
+            "is_full_load": true,
             "file_number": 0
         }
     }

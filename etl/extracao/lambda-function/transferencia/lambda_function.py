@@ -4,6 +4,7 @@ from transferencia_api import transferencia_api
 import json
 import boto3
 import pandas as pd
+from time import sleep
 # AWS Credentials
 BUCKET = config('BUCKET')
 AWS_REGION = config('AWS_REGION')
@@ -12,7 +13,7 @@ BUCKET_AWS_SECRET_ACCESS_KEY = config('BUCKET_AWS_SECRET_ACCESS_KEY')
 CUSTO_STN_SOURCES_STATES = 'custos_stn_sources_states.json'
 CUSTO_STN_TRANSFERENCIA_PATH = 'transferencia'
 custos_stn_state = {}
-STOP_CONDITION_TEST = 1500
+STOP_CONDITION_TEST = 100000000
 S3 = boto3.resource(
     's3',
     region_name = AWS_REGION,
@@ -86,18 +87,18 @@ def consume_api(custos_stn_state,transferencia):
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
             load_s3_file_content(f'{CUSTO_STN_TRANSFERENCIA_PATH}/transferencia_{transferencia.file_number}.csv', json.dumps(transferencia_items['items'], indent= 2))
 
-        while transferencia_items['hasMore'] and transferencia_items['initial_offset'] <= STOP_CONDITION_TEST:
-            
-            transferencia_items = transferencia.get_items_from_api()
-            
-            transferencia.initial_offset = transferencia_items['initial_offset']
-            transferencia.file_number = transferencia_items['file_number'] + 1
-            transferencia.is_full_load = False
-            custos_stn_state['sources']['transferencia']['initial_offset'] = transferencia.initial_offset
-            custos_stn_state['sources']['transferencia']['file_number'] =  transferencia.file_number
-            custos_stn_state['sources']['transferencia']['is_full_load'] = transferencia.is_full_load
-            load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
-            load_s3_file_content(f'{CUSTO_STN_TRANSFERENCIA_PATH}/transferencia_{transferencia.file_number}.csv', json.dumps(transferencia_items['items'], indent= 2))
+            while transferencia_items['hasMore'] and transferencia_items['initial_offset'] <= STOP_CONDITION_TEST:
+                sleep(5)
+                transferencia_items = transferencia.get_items_from_api()
+                
+                transferencia.initial_offset = transferencia_items['initial_offset']
+                transferencia.file_number = transferencia_items['file_number'] + 1
+                transferencia.is_full_load = False
+                custos_stn_state['sources']['transferencia']['initial_offset'] = transferencia.initial_offset
+                custos_stn_state['sources']['transferencia']['file_number'] =  transferencia.file_number
+                custos_stn_state['sources']['transferencia']['is_full_load'] = transferencia.is_full_load
+                load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
+                load_s3_file_content(f'{CUSTO_STN_TRANSFERENCIA_PATH}/transferencia_{transferencia.file_number}.csv', json.dumps(transferencia_items['items'], indent= 2))
         
 
 
