@@ -82,7 +82,7 @@ def consume_api(custos_stn_state,demais):
             demais.initial_offset = demais_items['initial_offset']
             demais.file_number = demais_items['file_number']
             custos_stn_state['sources']['demais']['initial_offset'] = demais_items['initial_offset']
-            custos_stn_state['sources']['file_number'] = demais_items['file_number']
+            custos_stn_state['sources']['demais']['file_number'] = demais_items['file_number']
             
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
             load_s3_file_content(f'{CUSTO_STN_DEMAIS_PATH}/demais_{demais.file_number}.csv', json.dumps(demais_items['items'], indent= 2))

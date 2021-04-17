@@ -82,7 +82,7 @@ def consume_api(custos_stn_state,transferencia):
             transferencia.initial_offset = transferencia_items['initial_offset']
             transferencia.file_number = transferencia_items['file_number']
             custos_stn_state['sources']['transferencia']['initial_offset'] = transferencia_items['initial_offset']
-            custos_stn_state['sources']['file_number'] = transferencia_items['file_number']
+            custos_stn_state['sources']['transferencia']['file_number'] = transferencia_items['file_number']
             
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
             load_s3_file_content(f'{CUSTO_STN_TRANSFERENCIA_PATH}/transferencia_{transferencia.file_number}.csv', json.dumps(transferencia_items['items'], indent= 2))

@@ -19,7 +19,7 @@ dag = DAG(
     dag_id = 'custos_stn_pessoal_ativo',
     start_date = airflow.utils.dates.days_ago(2),
     default_args = default_args,
-    schedule_interval = '*/16 * * * *',
+    schedule_interval = '*/5 * * * *',
     catchup=False
 )
 

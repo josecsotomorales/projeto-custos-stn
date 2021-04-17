@@ -82,7 +82,7 @@ def consume_api(custos_stn_state,pensionista):
             pensionista.initial_offset = pensionista_items['initial_offset']
             pensionista.file_number = pensionista_items['file_number']
             custos_stn_state['sources']['pensionista']['initial_offset'] = pensionista_items['initial_offset']
-            custos_stn_state['sources']['file_number'] = pensionista_items['file_number']
+            custos_stn_state['sources']['pensionista']['file_number'] = pensionista_items['file_number']
             
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
             load_s3_file_content(f'{CUSTO_STN_PENSIONISTA_PATH}/pensionista_{pensionista.file_number}.csv', json.dumps(pensionista_items['items'], indent= 2))

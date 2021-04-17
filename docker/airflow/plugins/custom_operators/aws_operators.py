@@ -51,9 +51,9 @@ class LambdaOperator(BaseOperator):
 
         self.log.info(f'Invoking {self.arn}')
         r = self.lambda_client.invoke(FunctionName=self.arn,
-                            InvocationType='RequestResponse')
+                            InvocationType='Event')
 
-        payload = json.loads(r['Payload'].read())
+        # payload = json.loads(r['Payload'].read())
 
-        if payload and 'errorMessage' in payload:
-            raise(Exception(payload['errorMessage']))
+        # if payload and 'errorMessage' in payload:
+        #     raise(Exception(payload['errorMessage']))

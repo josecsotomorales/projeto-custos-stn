@@ -82,7 +82,7 @@ def consume_api(custos_stn_state,pessoal_ativo):
             pessoal_ativo.initial_offset = pessoal_ativo_items['initial_offset']
             pessoal_ativo.file_number = pessoal_ativo_items['file_number']
             custos_stn_state['sources']['pessoal_ativo']['initial_offset'] = pessoal_ativo_items['initial_offset']
-            custos_stn_state['sources']['file_number'] = pessoal_ativo_items['file_number']
+            custos_stn_state['sources']['pessoal_ativo']['file_number'] = pessoal_ativo_items['file_number']
             
             load_s3_file_content_json(CUSTO_STN_SOURCES_STATES, json.dumps(custos_stn_state, indent= 2))
             load_s3_file_content(f'{CUSTO_STN_PESSOAL_ATIVO_PATH}/pessoal_ativo_{pessoal_ativo.file_number}.csv', json.dumps(pessoal_ativo_items['items'], indent= 2))
