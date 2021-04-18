@@ -65,8 +65,6 @@ services:
     image: jupyter/pyspark-notebook
     ports: 
       - 8888:8888
-    volumes:
-      - jupyter:/home/custos-stn/work
 
 networks:
   network-common:
