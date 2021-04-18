@@ -1,4 +1,5 @@
 apache-airflow[postgres]
+dbt
 paramiko
 boto3
 apache-airflow-providers-sftp
