@@ -10,6 +10,8 @@ COPY ./requirements.txt /
 
 RUN pip3 install -r requirements.txt
 
+RUN pip3 install dbt
+
 ENV PYTHONPATH=$PYTHONPATH:/root/airflow/
 
 ENV AIRFLOW__CORE__EXECUTOR=LocalExecutor \

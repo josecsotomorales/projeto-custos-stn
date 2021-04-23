@@ -43,6 +43,8 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./airflow/docker/
+    environment: 
+      ENV DBT_PROFILES_DIR: '/usr/app/dbt'
     depends_on: 
       - postgres
     ports: 
@@ -57,6 +59,7 @@ services:
       - ./airflow/dags:/root/airflow/dags
       - ./airflow/plugins:/root/airflow/plugins
       - ./airflow/.env:/root/airflow/.env
+      - ./dbt:/usr/app/dbt
     restart: always 
 
   jupyter-notebook:
