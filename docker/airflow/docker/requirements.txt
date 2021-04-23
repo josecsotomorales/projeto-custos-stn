@@ -4,5 +4,6 @@ paramiko
 boto3
 apache-airflow-providers-sftp
 apache-airflow-providers-ssh
+airflow-dbt
 python-decouple
 SQLAlchemy==1.3.23

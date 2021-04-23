@@ -44,7 +44,8 @@ services:
       dockerfile: Dockerfile
       context: ./airflow/docker/
     environment: 
-      ENV DBT_PROFILES_DIR: '/usr/app/dbt'
+      DBT_PROFILES_DIR: '/usr/app/dbt'
+      DBT_PROJECT_DIR: '/usr/app/dbt'
     depends_on: 
       - postgres
     ports: 
