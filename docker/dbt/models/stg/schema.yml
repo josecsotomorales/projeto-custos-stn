@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: custos_stn_fonte
+    database: custos_stn
+    schema: custos_stn_fonte
+    tables:
+      - name: demais_custos
+      - name: depreciacao
+      - name: pensionistas
+      - name: pessoal_ativo
+      - name: pessoal_inativo
+      - name: transferencias
+
+models:
+  - name: stg_demais_custos
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.DEMAIS_CUSTOS
+  - name: stg_depreciacao
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.DEPRECIACAO
+  - name: stg_pensionistas
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PENSIONISTAS
+  - name: stg_pessoal_ativo
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PESSOAL_ATIVO
+  - name: stg_pessoal_inativo
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PESSOAL_INATIVO
+  - name: stg_transferencias
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.TRANSFERENCIAS

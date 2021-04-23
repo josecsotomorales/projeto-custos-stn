@@ -7,7 +7,7 @@ version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'custos-stn'
+profile: 'custos_stn'
 
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
@@ -34,5 +34,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   custos_stn:
       # Applies to all files under models/example/
-      example:
-          materialized: view
+      stg:
+        +schema: custos_stn_stg
+        materialized: view
+        transient: false
+      edw:
+        +schema: custos_stn_edw
+        materialized: incremental
+        transient: false
+

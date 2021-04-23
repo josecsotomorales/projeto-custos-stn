@@ -1,0 +1,101 @@
+version: 2
+# salesforce dimensions
+models:
+  # Dimensoes descrição e teste
+  - name: dim_demais_custos
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.DEMAIS_CUSTOS
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+  
+  - name: dim_depreciacao
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.DEPRECIACAO
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_pensionistas
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PENSIONISTAS
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_pessoal_ativo
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PESSOAL_ATIVO
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null    
+
+  - name: dim_pessoal_inativo
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PESSOAL_INATIVO
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null 
+          
+          
+  - name: dim_transferencias
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.TRANSFERENCIAS
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+  
+  # Fatos descricões e testes
+  - name: fato_demais_custos
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.DEMAIS_CUSTOS
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+
+  - name: fato_depreciacao
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.DEPRECIACAO
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+
+  - name: fato_pensionistas
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PENSIONISTAS
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+
+  - name: fato_pessoal_ativo
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PESSOAL_ATIVO
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null    
+
+  - name: fato_pessoal_inativo
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.PESSOAL_INATIVO
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null 
+
+  - name: fato_transferencias
+    description: Os dados desta tabela é deriavada do CUSTOS_STN.CUSTOS_STN_FONTE.TRANSFERENCIAS
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null

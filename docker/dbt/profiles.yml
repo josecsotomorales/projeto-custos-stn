@@ -1,13 +1,13 @@
-custos-stn:
+custos_stn:
   target: dev
   outputs:
     dev:
       type: postgres
-      host: 192.168.80.1
+      host: 172.25.0.1
       user: postgres
       password: postgres
       port: 5432
       dbname: custos_stn
-      schema: custos_stn_raw
+      schema: stg
       threads: 4
       keepalives_idle: 0 # default 0, indicating the system default
