@@ -4,43 +4,43 @@
     ) 
 }}
 
-SELECT TO_CHAR(datum, 'yyyymmdd')::INT AS date_dim_id,
-       datum AS date_actual,
-       EXTRACT(EPOCH FROM datum) AS epoch,
-       TO_CHAR(datum, 'fmDDth') AS day_suffix,
-       TO_CHAR(datum, 'Day') AS day_name,
-       EXTRACT(ISODOW FROM datum) AS day_of_week,
-       EXTRACT(DAY FROM datum) AS day_of_month,
-       datum - DATE_TRUNC('quarter', datum)::DATE + 1 AS day_of_quarter,
-       EXTRACT(DOY FROM datum) AS day_of_year,
-       TO_CHAR(datum, 'W')::INT AS week_of_month,
-       EXTRACT(WEEK FROM datum) AS week_of_year,
-       EXTRACT(ISOYEAR FROM datum) || TO_CHAR(datum, '"-W"IW-') || EXTRACT(ISODOW FROM datum) AS week_of_year_iso,
-       EXTRACT(MONTH FROM datum) AS month_actual,
-       TO_CHAR(datum, 'Month') AS month_name,
-       TO_CHAR(datum, 'Mon') AS month_name_abbreviated,
-       EXTRACT(QUARTER FROM datum) AS quarter_actual,
+SELECT TO_CHAR(datum, 'yyyymmdd')::INT AS id,
+       datum AS data_atual,
+       EXTRACT(EPOCH FROM datum) AS epoca,
+       TO_CHAR(datum, 'fmDDth') AS dia_sufixo,
+       TO_CHAR(datum, 'Day') AS dia_nome,
+       EXTRACT(ISODOW FROM datum) AS day_da_semana,
+       EXTRACT(DAY FROM datum) AS dia_do_mes,
+       datum - DATE_TRUNC('quarter', datum)::DATE + 1 AS dia_do_trimestre,
+       EXTRACT(DOY FROM datum) AS dia_do_ano,
+       TO_CHAR(datum, 'W')::INT AS semana_do_mes,
+       EXTRACT(WEEK FROM datum) AS semana_do_ano,
+       EXTRACT(ISOYEAR FROM datum) || TO_CHAR(datum, '"-W"IW-') || EXTRACT(ISODOW FROM datum) AS semana_do_ano_iso,
+       EXTRACT(MONTH FROM datum) AS mes_atual,
+       TO_CHAR(datum, 'Month') AS mes_nome,
+       TO_CHAR(datum, 'Mon') AS mes_nome_abreviado,
+       EXTRACT(QUARTER FROM datum) AS trimestre_atual,
        CASE
-           WHEN EXTRACT(QUARTER FROM datum) = 1 THEN 'First'
-           WHEN EXTRACT(QUARTER FROM datum) = 2 THEN 'Second'
-           WHEN EXTRACT(QUARTER FROM datum) = 3 THEN 'Third'
-           WHEN EXTRACT(QUARTER FROM datum) = 4 THEN 'Fourth'
-           END AS quarter_name,
-       EXTRACT(ISOYEAR FROM datum) AS year_actual,
-       datum + (1 - EXTRACT(ISODOW FROM datum))::INT AS first_day_of_week,
-       datum + (7 - EXTRACT(ISODOW FROM datum))::INT AS last_day_of_week,
-       datum + (1 - EXTRACT(DAY FROM datum))::INT AS first_day_of_month,
-       (DATE_TRUNC('MONTH', datum) + INTERVAL '1 MONTH - 1 day')::DATE AS last_day_of_month,
-       DATE_TRUNC('quarter', datum)::DATE AS first_day_of_quarter,
-       (DATE_TRUNC('quarter', datum) + INTERVAL '3 MONTH - 1 day')::DATE AS last_day_of_quarter,
-       TO_DATE(EXTRACT(YEAR FROM datum) || '-01-01', 'YYYY-MM-DD') AS first_day_of_year,
-       TO_DATE(EXTRACT(YEAR FROM datum) || '-12-31', 'YYYY-MM-DD') AS last_day_of_year,
-       TO_CHAR(datum, 'mmyyyy') AS mmyyyy,
-       TO_CHAR(datum, 'mmddyyyy') AS mmddyyyy,
+           WHEN EXTRACT(QUARTER FROM datum) = 1 THEN 'Primeiro'
+           WHEN EXTRACT(QUARTER FROM datum) = 2 THEN 'Segundo'
+           WHEN EXTRACT(QUARTER FROM datum) = 3 THEN 'Terceiro'
+           WHEN EXTRACT(QUARTER FROM datum) = 4 THEN 'Quarto'
+           END AS trimestre_nome,
+       EXTRACT(ISOYEAR FROM datum) AS ano_atual,
+       datum + (1 - EXTRACT(ISODOW FROM datum))::INT AS primeiro_dia_da_semana,
+       datum + (7 - EXTRACT(ISODOW FROM datum))::INT AS ultimo_dia_da_semana,
+       datum + (1 - EXTRACT(DAY FROM datum))::INT AS primeiro_dia_do_mes,
+       (DATE_TRUNC('MONTH', datum) + INTERVAL '1 MONTH - 1 day')::DATE AS ultimo_dia_do_mes,
+       DATE_TRUNC('quarter', datum)::DATE AS primeiro_dia_do_trimestre,
+       (DATE_TRUNC('quarter', datum) + INTERVAL '3 MONTH - 1 day')::DATE AS ultimo_dia_do_trimestre,
+       TO_DATE(EXTRACT(YEAR FROM datum) || '-01-01', 'YYYY-MM-DD') AS primeiro_dia_do_ano,
+       TO_DATE(EXTRACT(YEAR FROM datum) || '-12-31', 'YYYY-MM-DD') AS ultimo_dia_do_ano,
+       TO_CHAR(datum, 'mmyyyy') AS mes_ano,
+       TO_CHAR(datum, 'mmddyyyy') AS mes_dia_ano,
        CASE
            WHEN EXTRACT(ISODOW FROM datum) IN (6, 7) THEN TRUE
            ELSE FALSE
-           END AS weekend_indr
+           END AS semana_decrementado
 FROM (SELECT '2000-01-01'::DATE + SEQUENCE.DAY AS datum
       FROM GENERATE_SERIES(0, 29219) AS SEQUENCE (DAY)
       GROUP BY SEQUENCE.DAY) DQ
