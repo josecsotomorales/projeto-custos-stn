@@ -15,5 +15,6 @@ select
   codigo_esfera_orcamentaria,
   codigo_modalidade_aplicacao,
   codigo_resultado_eof,
-  valor_custo_de_transferencias
+  valor_custo_de_transferencias,
+  mes_ano_lancamento
 from {{ ref('stg_transferencias') }} as transferencias

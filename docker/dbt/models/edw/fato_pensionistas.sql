@@ -12,5 +12,6 @@ select
 	codigo_organizacao_3,
 	ano_lancamento,
 	mes_lancamento,
-	valor_custo_pensionistas
+	valor_custo_pensionistas,
+	mes_ano_lancamento
 from {{ ref('stg_pensionistas') }} as pensionistas

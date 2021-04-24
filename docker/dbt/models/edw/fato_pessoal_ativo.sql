@@ -19,5 +19,6 @@ select
 	codigo_escolaridade,
 	codigo_faixa_etaria,
 	codigo_forca_trabalho,
-	valor_custo_pessoal
+	valor_custo_pessoal,
+	mes_ano_lancamento
 from {{ ref('stg_pessoal_ativo') }} as pessoal_ativo

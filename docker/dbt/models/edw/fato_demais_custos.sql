@@ -25,5 +25,6 @@ select
 	codigo_natureza_despesa_deta,
 	id_esfera_orcamentaria,
 	id_in_resultado_eof,
-	valor_custo
+	valor_custo,
+	mes_ano_emissao
 from {{ ref('stg_demais_custos') }} as demais_custos

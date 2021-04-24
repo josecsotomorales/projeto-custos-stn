@@ -12,5 +12,6 @@ select
   codigo_organizacao_3,
   ano_lancamento,
   mes_lancamento,
-  valor_custo_de_pessoal_inativo
+  valor_custo_de_pessoal_inativo,
+  mes_ano_lancamento
 from {{ ref('stg_pessoal_inativo') }} as pessoal_inativo

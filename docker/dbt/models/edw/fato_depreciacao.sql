@@ -13,5 +13,6 @@ select
 	codigo_conta_contabil
 	ano_lancamento,
 	mes_lancamento,
-	valor_custo_depreciacao
+	valor_custo_depreciacao,
+	mes_ano_lancamento
 from {{ ref('stg_depreciacao') }} as depreciacao
