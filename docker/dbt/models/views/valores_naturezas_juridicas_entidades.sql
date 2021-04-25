@@ -1,7 +1,7 @@
 
 select  
-	codigo_natureza_juridica,
-	descricao_natureza_juridica,
+	codigo_organizacao,
+	nome_organizacao,
 	mes_lancamento,
 	ano_lancamento,
 	calendario.id,
@@ -21,8 +21,8 @@ select
 	max(valor_custo)
 from (
  select 
- 	codigo_sirog_n05 as codigo_natureza_juridica,
-	descricao_sirog_n05 as descricao_natureza_juridica,
+ 	codigo_sirog_n05 as codigo_organizacao,
+	descricao_sirog_n05 as nome_organizacao,
 	mes_referencia as mes_lancamento,
 	ano_referencia as ano_lancamento,
 	mes_ano_referencia as mes_ano_lancamento,
@@ -32,8 +32,8 @@ from (
  union all
  
  select
- 	codigo_natureza_juridica,
-	descricao_natureza_juridica,
+  codigo_organizacao_1 as codigo_organizacao,
+  descricao_organizacao_1 as nome_organizacao,
 	mes_lancamento,
 	ano_lancamento,
 	mes_ano_lancamento,
@@ -43,8 +43,8 @@ from (
  union all
  
  select
- 	codigo_natureza_juridica,
-	descricao_natureza_juridica,
+  codigo_organizacao_1 as codigo_organizacao,
+  descricao_organizacao_1 as nome_organizacao,
 	mes_lancamento,
 	ano_lancamento,
 	mes_ano_lancamento,
@@ -54,8 +54,8 @@ from (
  union all
  
  select 
- 	codigo_natureza_juridica,
-	descricao_natureza_juridica,
+  codigo_organizacao_1 as codigo_organizacao,
+  descricao_organizacao_1 as nome_organizacao,
 	mes_lancamento,
 	ano_lancamento,
 	mes_ano_lancamento,
@@ -65,8 +65,8 @@ from (
  union all
  
  select
- 	codigo_natureza_juridica,
-	descricao_natureza_juridica,
+  codigo_organizacao_1 as codigo_organizacao,
+  descricao_organizacao_1 as nome_organizacao,
 	mes_lancamento,
 	ano_lancamento,
 	mes_ano_lancamento,
@@ -76,8 +76,8 @@ from (
  union all
  
  select
-  	codigo_natureza_juridica,
-	descricao_natureza_juridica,
+  codigo_organizacao_1 as codigo_organizacao,
+  descricao_organizacao_1 as nome_organizacao,
 	mes_lancamento,
 	ano_lancamento,
 	mes_ano_lancamento,

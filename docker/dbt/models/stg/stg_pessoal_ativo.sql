@@ -1,5 +1,6 @@
 with pessoal_ativo as(
 	select
+		distinct
 		{{ dbt_utils.surrogate_key(['me_lanc','an_lanc', 'in_faixa_etaria','in_sexo','in_forca_trabalho','va_custo_de_pessoal']) }} as id,
 		co_natureza_juridica as codigo_natureza_juridica,
 		ds_natureza_juridica as descricao_natureza_juridica,
@@ -27,10 +28,10 @@ with pessoal_ativo as(
 		in_forca_trabalho as codigo_forca_trabalho,
 		va_custo_de_pessoal as valor_custo_pessoal_ativo
 	from {{source('custos_stn_fonte', 'pessoal_ativo')}}
+	where an_lanc < 2017
 ) 
 
 select
 	*,
 	concat(mes_lancamento, ano_lancamento)::integer as mes_ano_lancamento
 from pessoal_ativo
-where ano_lancamento < 2017
