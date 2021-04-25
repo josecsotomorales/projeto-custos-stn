@@ -39,7 +39,13 @@ with demais_custos as (
 
 select
 	*,
-	concat(mes_referencia, ano_referencia) as mes_ano_referencia,
-	concat(mes_emissao,ano_emissao) as mes_ano_emissao
+	case when concat(mes_referencia, ano_referencia) = '' then 
+			null
+		else concat(mes_referencia, ano_referencia)::integer 
+	end as mes_ano_referencia,
+	case when concat(mes_emissao,ano_emissao) = '' then
+			null
+		else concat(mes_emissao,ano_emissao)::integer 
+	end as mes_ano_emissao
 from demais_custos
 where ano_referencia < 2017

@@ -17,6 +17,6 @@ with pessoal_inativo as (
 
 select
 	*,
-	concat(mes_lancamento, ano_lancamento) as mes_ano_lancamento
+	concat(mes_lancamento, ano_lancamento)::integer as mes_ano_lancamento
 from pessoal_inativo
 where ano_lancamento < 2017

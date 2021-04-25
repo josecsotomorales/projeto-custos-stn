@@ -26,5 +26,6 @@ select
 	id_esfera_orcamentaria,
 	id_in_resultado_eof,
 	valor_custo,
-	mes_ano_emissao
+	mes_ano_emissao,
+	mes_ano_referencia
 from {{ ref('stg_demais_custos') }} as demais_custos

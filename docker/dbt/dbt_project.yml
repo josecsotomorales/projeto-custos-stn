@@ -42,4 +42,8 @@ models:
         +schema: custos_stn_edw
         materialized: incremental
         transient: false
+      views:
+        +schema: custos_stn_edw
+        materialized: view
+        transient: false
 
