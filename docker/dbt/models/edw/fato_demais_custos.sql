@@ -6,7 +6,7 @@
 
 select
 	id,
-	codigo_sirog_n05,
+	codigo_siorg_n05,
 	codigo_siorg_n06,
 	codigo_siorg_n07,
 	codigo_situacao_icc,

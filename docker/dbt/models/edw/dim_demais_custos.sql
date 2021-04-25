@@ -6,9 +6,9 @@
 
 select
 	id,
-	descricao_sirog_n05,
+	descricao_siorg_n05,
 	descricao_siorg_n06,
-	descricao_sirog_n07,
+	descricao_siorg_n07,
 	descricao_situacao_icc,
 	descricao_natureza_juridica_siorg,
 	descricao_natureza_despesa_deta,

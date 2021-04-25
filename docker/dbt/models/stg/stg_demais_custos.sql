@@ -2,12 +2,12 @@ with demais_custos as (
 	select
 		distinct
   	{{ dbt_utils.surrogate_key(['id_in_resultado_eof','co_siorg_n05','id_elemento_despesa_nade','id_subitem_nade','co_natureza_despesa_deta','va_custo','co_siorg_n06','co_situacao_icc','no_situacao_icc','id_natureza_juridica_siorg','id_esfera_orcamentaria','me_referencia','an_referencia']) }} as id,
-		co_siorg_n05 as codigo_sirog_n05,
-		ds_siorg_n05 as descricao_sirog_n05,
+		co_siorg_n05 as codigo_siorg_n05,
+		ds_siorg_n05 as descricao_siorg_n05,
 		co_siorg_n06 as codigo_siorg_n06,
 		ds_siorg_n06 as descricao_siorg_n06,
 		co_siorg_n07  as codigo_siorg_n07,
-		ds_siorg_n07 as descricao_sirog_n07,
+		ds_siorg_n07 as descricao_siorg_n07,
 		me_referencia as mes_referencia,
 		an_referencia as ano_referencia,
 		sg_mes_completo as mes_ano,
@@ -37,6 +37,7 @@ with demais_custos as (
 		va_custo as valor_custo
 	from {{source('custos_stn_fonte', 'demais_custos')}}
 	where an_referencia < 2017
+			  and co_siorg_n05 != -7
 )
 
 select

@@ -21,8 +21,8 @@ select
 	max(valor_custo)
 from (
  select 
- 	codigo_sirog_n05 as codigo_organizacao,
-	descricao_sirog_n05 as nome_organizacao,
+ 	codigo_siorg_n05 as codigo_organizacao,
+	descricao_siorg_n05 as nome_organizacao,
 	mes_referencia as mes_lancamento,
 	ano_referencia as ano_lancamento,
 	mes_ano_referencia as mes_ano_lancamento,

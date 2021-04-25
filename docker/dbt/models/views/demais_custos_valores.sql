@@ -1,7 +1,7 @@
 select
 	distinct
-	codigo_sirog_n05,
-	descricao_sirog_n05,
+	codigo_siorg_n05,
+	descricao_siorg_n05,
 	sum(valor_custo) as valor_custo_total,
 	min(valor_custo) as valor_custo_minimo,
 	max(valor_custo) as valor_custo_maximo,
