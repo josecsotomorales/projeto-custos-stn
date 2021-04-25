@@ -2,9 +2,9 @@ select
 	distinct
 	codigo_natureza_juridica,
 	descricao_natureza_juridica,
-	sum(valor_custo_pessoal) as valor_custo_total,
-	min(valor_custo_pessoal) as valor_custo_minimo,
-	max(valor_custo_pessoal) as valor_custo_maximo,
+	sum(valor_custo_pessoal_ativo) as valor_custo_total,
+	min(valor_custo_pessoal_ativo) as valor_custo_minimo,
+	max(valor_custo_pessoal_ativo) as valor_custo_maximo,
 	calendario.id,
 	calendario.dia_do_trimestre,
 	calendario.semana_do_mes,

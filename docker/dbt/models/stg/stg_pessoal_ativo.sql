@@ -25,7 +25,7 @@ with pessoal_ativo as(
 		ds_faixa_etaria as descricao_faixa_etaria,
 		in_sexo as codigo_sexo,
 		in_forca_trabalho as codigo_forca_trabalho,
-		va_custo_de_pessoal as valor_custo_pessoal
+		va_custo_de_pessoal as valor_custo_pessoal_ativo
 	from {{source('custos_stn_fonte', 'pessoal_ativo')}}
 ) 
 
