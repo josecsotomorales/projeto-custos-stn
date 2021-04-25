@@ -1,5 +1,5 @@
 select
-	fato_transferencias.id,
+	fato_transferencias.id as transferencias_id,
   fato_transferencias.codigo_natureza_juridica,
   fato_transferencias.codigo_organizacao_1,
   fato_transferencias.codigo_organizacao_2,

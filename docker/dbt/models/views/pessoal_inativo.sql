@@ -1,5 +1,5 @@
 select
-	fato_pessoal_inativo.id,
+	fato_pessoal_inativo.id as pessoal_inativo_id,
   fato_pessoal_inativo.codigo_natureza_juridica,
   fato_pessoal_inativo.codigo_organizacao_1,
   fato_pessoal_inativo.codigo_organizacao_2,

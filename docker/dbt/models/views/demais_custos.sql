@@ -1,5 +1,5 @@
 select
-  fato_demais_custos.id,
+  fato_demais_custos.id as demais_custos_id,
 	fato_demais_custos.codigo_sirog_n05,
 	fato_demais_custos.codigo_siorg_n06,
 	fato_demais_custos.codigo_siorg_n07,

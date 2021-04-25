@@ -1,5 +1,5 @@
 select
-	fato_pensionistas.id,
+	fato_pensionistas.id as pensionistas_id,
 	fato_pensionistas.codigo_natureza_juridica,
 	fato_pensionistas.codigo_organizacao_1,
 	fato_pensionistas.codigo_organizacao_2,

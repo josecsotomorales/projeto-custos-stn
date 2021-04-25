@@ -1,5 +1,5 @@
 select
-  fato_depreciacao.id,
+  fato_depreciacao.id as depreciacao_id,
 	fato_depreciacao.codigo_natureza_juridica,
 	fato_depreciacao.codigo_organizacao_1,
 	fato_depreciacao.codigo_organizacao_2,
