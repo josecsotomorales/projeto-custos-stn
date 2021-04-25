@@ -1,7 +1,7 @@
 with pessoal_ativo as(
 	select
 		distinct
-		{{ dbt_utils.surrogate_key(['me_lanc','an_lanc', 'in_faixa_etaria','in_sexo','in_forca_trabalho','va_custo_de_pessoal']) }} as id,
+		{{ dbt_utils.surrogate_key(['me_lanc','an_lanc', 'in_faixa_etaria','in_sexo','co_organizacao_n1','co_organizacao_n2','co_organizacao_n3','co_organizacao_n4','co_organizacao_n5','co_organizacao_n6','in_escolaridade','in_forca_trabalho','va_custo_de_pessoal']) }} as id,
 		co_natureza_juridica as codigo_natureza_juridica,
 		ds_natureza_juridica as descricao_natureza_juridica,
 		co_organizacao_n1 as codigo_organizacao_1,

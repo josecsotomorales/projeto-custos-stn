@@ -1,7 +1,7 @@
 with pessoal_inativo as (
 	select
 		distinct
-		{{ dbt_utils.surrogate_key(['co_natureza_juridica','an_lanc', 'me_lanc','va_custo_pessoal_inativo']) }} as id,
+		{{ dbt_utils.surrogate_key(['co_natureza_juridica','an_lanc', 'me_lanc','va_custo_pessoal_inativo','co_organizacao_n1','co_organizacao_n2','co_organizacao_n3']) }} as id,
 		co_natureza_juridica as codigo_natureza_juridica,
 		ds_natureza_juridica as descricao_natureza_juridica,
 		co_organizacao_n1 as codigo_organizacao_1,
